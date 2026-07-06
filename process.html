@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Process — ManHeng</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+
+/* ── HERO ── */
+#hero{
+  position:relative;height:65vh;min-height:480px;
+  display:flex;align-items:flex-end;
+  overflow:hidden;background:#0a0604;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('assets/hqp10.jpg') center 30%/cover no-repeat;
+  transform:scale(1.08);transition:transform 12s ease-out;
+}
+.hero-bg.loaded{transform:scale(1)}
+.hero-grad{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,6,4,.92) 0%,rgba(10,6,4,.3) 60%);
+}
+.hero-content{
+  position:relative;z-index:2;
+  padding:0 80px 80px;
+}
+.hero-label{
+  display:flex;align-items:center;gap:16px;
+  font-size:9px;font-weight:500;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--gold-l);margin-bottom:20px;
+  opacity:0;animation:fadeUp .9s .3s cubic-bezier(.16,1,.3,1) forwards;
+}
+.hero-label::before{content:'';width:44px;height:1px;background:var(--gold-l)}
+h1.page-h{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(44px,5.5vw,72px);font-weight:300;
+  color:#fff;line-height:1.08;letter-spacing:-.02em;
+  opacity:0;animation:fadeUp 1s .5s cubic-bezier(.16,1,.3,1) forwards;
+}
+h1.page-h em{font-style:italic;color:var(--gold-l)}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+
+/* ── INTRO ── */
+#intro{
+  padding:100px 80px;background:var(--cream);
+  display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start;
+}
+.intro-left h2{margin-bottom:24px}
+.intro-left .body-copy{margin-bottom:18px}
+.intro-right{padding-top:8px}
+.intro-keywords{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+.kw{
+  padding:8px 18px;border:1px solid var(--border);
+  font-size:10px;font-weight:400;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--brown-m);
+}
+.intro-quote{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:300;font-style:italic;
+  color:var(--brown-m);line-height:1.6;
+  padding-left:24px;border-left:2px solid var(--gold);
+  margin-top:8px;
+}
+
+/* ── PROCESS STEPS ── */
+#steps{padding:0 80px 120px;background:var(--cream)}
+.steps-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:0;border:1px solid var(--border);
+}
+.step-card{
+  padding:48px 32px;border-right:1px solid var(--border);
+  position:relative;overflow:hidden;
+  transition:background .35s;
+}
+.step-card:last-child{border:none}
+.step-card:hover{background:#ede8df}
+.step-card:hover .step-img{filter:none;transform:scale(1.04)}
+.step-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:52px;font-weight:300;
+  color:var(--gold);opacity:.35;line-height:1;
+  margin-bottom:24px;
+}
+.step-img{
+  width:100%;aspect-ratio:1;object-fit:cover;
+  margin-bottom:22px;
+  filter:sepia(10%) contrast(1.05);
+  transition:filter .4s,transform .5s cubic-bezier(.16,1,.3,1);
+}
+.step-title{
+  font-size:11px;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--brown);margin-bottom:14px;line-height:1.4;
+}
+.step-items{display:flex;flex-direction:column;gap:6px}
+.step-item{
+  font-size:12px;font-weight:300;
+  color:var(--muted);line-height:1.55;
+  padding:4px 0;border-bottom:1px solid rgba(0,0,0,.04);
+}
+.step-item:last-child{border:none}
+
+/* ── DIRECTION ── */
+#direction{
+  padding:120px 80px;background:var(--brown);
+  display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start;
+}
+.dir-left h2{color:#fff;margin-bottom:24px}
+.dir-left p{font-size:14px;font-weight:300;color:rgba(255,255,255,.45);line-height:1.9;margin-bottom:36px}
+.dir-keywords{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:0}
+.dir-kw{
+  padding:8px 18px;border:1px solid rgba(255,255,255,.15);
+  font-size:10px;font-weight:400;letter-spacing:.18em;
+  text-transform:uppercase;color:rgba(255,255,255,.55);
+  transition:border-color .25s,color .25s;
+}
+.dir-kw:hover{border-color:var(--gold);color:var(--gold-l)}
+.dir-right{display:flex;flex-direction:column;gap:0}
+.dir-step{
+  display:grid;grid-template-columns:52px 1fr;gap:16px;
+  align-items:start;padding:24px 0;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  transition:background .2s;
+}
+.dir-step:first-child{border-top:1px solid rgba(255,255,255,.07)}
+.dir-step-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:32px;font-weight:300;color:var(--gold);
+  line-height:1;padding-top:2px;
+}
+.dir-step-t{
+  font-size:11px;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;color:#fff;margin-bottom:6px;
+}
+.dir-step-d{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.42);line-height:1.8}
+
+/* ── GALLERY STRIP ── */
+#gallery-strip{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:3px;background:#0a0604;
+}
+.gs-item{position:relative;overflow:hidden;aspect-ratio:4/3}
+.gs-item img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .7s cubic-bezier(.16,1,.3,1),opacity .4s;
+  opacity:.82;
+}
+.gs-item:hover img{transform:scale(1.06);opacity:.95}
+.gs-label{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:20px 24px;
+  background:linear-gradient(to top,rgba(0,0,0,.7),transparent);
+}
+.gs-label span{
+  font-size:9px;font-weight:400;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold-l);
+}
+
+/* ── CTA ── */
+#cta{
+  padding:100px 80px;background:var(--warm);
+  text-align:center;
+}
+#cta h2{margin-bottom:16px;text-align:center}
+#cta p{
+  font-size:14px;font-weight:300;color:var(--muted);
+  line-height:1.8;max-width:480px;margin:0 auto 40px;
+}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+@media(max-width:900px){
+  .hero-content{padding:0 28px 60px}
+  #intro{grid-template-columns:1fr;padding:80px 28px;gap:40px}
+  #steps{padding:0 28px 80px}
+  .steps-grid{grid-template-columns:1fr}
+  .step-card{border-right:none;border-bottom:1px solid var(--border)}
+  #direction{grid-template-columns:1fr;padding:80px 28px;gap:48px}
+  #gallery-strip{grid-template-columns:1fr 1fr}
+  #cta{padding:80px 28px}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="mainNav" class="light" data-light>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 3L5 8l5 5"/></svg>
+    Back to Home
+  </a>
+  <div class="nav-links">
+    <a href="#intro">Overview</a>
+    <a href="#steps">The 5 Steps</a>
+    <a href="#direction" class="hide-mob">Design Direction</a>
+    <a href="index.html#contact" class="btn-nav">Enquire</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-grad"></div>
+  <div class="hero-content">
+    <div class="hero-label">ManHeng · How We Work</div>
+    <h1 class="page-h">Our Design<br><em>Service Process</em></h1>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-inner">
+    <span>Project Requirements</span><span>Spatial Planning</span><span>Spatial Experience</span><span>Lifestyle Amenities</span><span>Design Implementation</span><span>Refined Timber Living</span><span>Quiet Warmth</span><span>Timeless Elegance</span>
+    <span>Project Requirements</span><span>Spatial Planning</span><span>Spatial Experience</span><span>Lifestyle Amenities</span><span>Design Implementation</span><span>Refined Timber Living</span><span>Quiet Warmth</span><span>Timeless Elegance</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section id="intro">
+  <div class="intro-left">
+    <div class="eyebrow reveal">Our Approach</div>
+    <h2 class="section-h reveal d1">A Rigorous Process<br>Behind <em>Every Home</em></h2>
+    <p class="body-copy reveal d2">From initial project requirements through to delivery, every ManHeng home undergoes a rigorous five-stage design service process — ensuring each space is purposefully designed, carefully executed, and built to endure.</p>
+    <p class="body-copy reveal d2">This isn't a formula. It is a considered methodology shaped by over 20 years of experience — one that treats every site, every family, and every home as a distinct and irreplaceable opportunity.</p>
+  </div>
+  <div class="intro-right reveal d2">
+    <div class="intro-keywords">
+      <span class="kw">Quiet Warmth</span>
+      <span class="kw">Timeless Elegance</span>
+      <span class="kw">Natural Materials</span>
+      <span class="kw">Refined Simplicity</span>
+    </div>
+    <blockquote class="intro-quote">"Each texture is carefully considered. Each void is deliberately preserved. In the gentle warmth of timber, the space absorbs the noise of the world — while offering a place of calm and quiet belonging."</blockquote>
+  </div>
+</section>
+
+<!-- PROCESS STEPS -->
+<section id="steps">
+  <div class="steps-grid">
+
+    <div class="step-card reveal">
+      <div class="step-n">01</div>
+      <img src="assets/hqp25.jpg" alt="Project Requirements" class="step-img">
+      <div class="step-title">Project Requirements</div>
+      <div class="step-items">
+        <div class="step-item">Occupancy Duration</div>
+        <div class="step-item">Occupant Profile</div>
+        <div class="step-item">Evolution of Spatial Functions</div>
+        <div class="step-item">Changing Occupant Needs</div>
+      </div>
+    </div>
+
+    <div class="step-card reveal d1">
+      <div class="step-n">02</div>
+      <img src="assets/hqp26.jpg" alt="Spatial Planning" class="step-img">
+      <div class="step-title">Spatial Planning</div>
+      <div class="step-items">
+        <div class="step-item">Spatial Zoning</div>
+        <div class="step-item">Circulation Flow</div>
+        <div class="step-item">Natural Ventilation</div>
+        <div class="step-item">Daylighting Strategy</div>
+      </div>
+    </div>
+
+    <div class="step-card reveal d2">
+      <div class="step-n">03</div>
+      <img src="assets/hqp27.jpg" alt="Spatial Experience" class="step-img">
+      <div class="step-title">Spatial Experience</div>
+      <div class="step-items">
+        <div class="step-item">Architectural Finishes</div>
+        <div class="step-item">Interior Styling</div>
+        <div class="step-item">Colour Palette</div>
+        <div class="step-item">Material Palette</div>
+      </div>
+    </div>
+
+    <div class="step-card reveal d3">
+      <div class="step-n">04</div>
+      <img src="assets/hqp35.jpg" alt="Lifestyle Amenities" class="step-img">
+      <div class="step-title">Lifestyle Amenities</div>
+      <div class="step-items">
+        <div class="step-item">Water & Electrical Systems</div>
+        <div class="step-item">Safety Systems</div>
+        <div class="step-item">Lighting Design</div>
+      </div>
+    </div>
+
+    <div class="step-card reveal d4">
+      <div class="step-n">05</div>
+      <img src="assets/hqp37.jpg" alt="Design Implementation" class="step-img">
+      <div class="step-title">Design Implementation</div>
+      <div class="step-items">
+        <div class="step-item">Material & Product Selection</div>
+        <div class="step-item">Cost Management</div>
+        <div class="step-item">Detailed Design Drawings</div>
+        <div class="step-item">Project Delivery</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DESIGN DIRECTION -->
+<section id="direction">
+  <div class="dir-left">
+    <div class="eyebrow eyebrow-light reveal">Design Direction</div>
+    <h2 class="section-h reveal d1" style="color:#fff">Refined<br><em style="color:rgba(255,255,255,.55)">Timber Living</em></h2>
+    <p class="reveal d2">ManHeng homes speak the language of warmth and restraint. Timeless spaces where quality of life is felt, not performed — where every detail earns its place and every material is chosen for how it will age.</p>
+    <div class="dir-keywords reveal d3">
+      <span class="dir-kw">Quiet Warmth</span>
+      <span class="dir-kw">Timeless Elegance</span>
+      <span class="dir-kw">Natural Materials</span>
+      <span class="dir-kw">Refined Simplicity</span>
+    </div>
+  </div>
+  <div class="dir-right">
+    <div class="dir-step reveal d1">
+      <div class="dir-step-n">01</div>
+      <div>
+        <div class="dir-step-t">Character of Place</div>
+        <div class="dir-step-d">Each home is shaped by its locality — from district character to street orientation. Design decisions are rooted in the specific context of land and place.</div>
+      </div>
+    </div>
+    <div class="dir-step reveal d2">
+      <div class="dir-step-n">02</div>
+      <div>
+        <div class="dir-step-t">Precision in Detail</div>
+        <div class="dir-step-d">From structural decisions to the selection of sanitary fittings, no detail is left unconsidered. Meticulous planning underpins every ManHeng home.</div>
+      </div>
+    </div>
+    <div class="dir-step reveal d3">
+      <div class="dir-step-n">03</div>
+      <div>
+        <div class="dir-step-t">Livability First</div>
+        <div class="dir-step-d">Aesthetics and function are never at odds. Layouts are optimised for how families actually live — maximising comfort, natural light, and everyday practicality.</div>
+      </div>
+    </div>
+    <div class="dir-step reveal d4">
+      <div class="dir-step-n">04</div>
+      <div>
+        <div class="dir-step-t">Value Preservation</div>
+        <div class="dir-step-d">Through meticulous planning and a commitment to excellence, every property is developed to unlock its full potential and reveal its inherent, distinct identity.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY STRIP -->
+<div id="gallery-strip">
+  <div class="gs-item reveal">
+    <img src="assets/hqp40.jpg" alt="Master Bathroom">
+    <div class="gs-label"><span>Master Bathroom · Level 3</span></div>
+  </div>
+  <div class="gs-item reveal d1">
+    <img src="assets/hqp29.jpg" alt="Kitchen">
+    <div class="gs-label"><span>Kitchen · Level 1</span></div>
+  </div>
+  <div class="gs-item reveal d2">
+    <img src="assets/hqp33.jpg" alt="Ensuite Bedroom">
+    <div class="gs-label"><span>Ensuite Bedroom · Level 2</span></div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="eyebrow reveal" style="justify-content:center">What's Next</div>
+  <h2 class="section-h reveal d1">Ready to Explore<br><em>Our Projects?</em></h2>
+  <p class="reveal d2">See how the ManHeng process translates into real homes — from 20 Dafne Street to upcoming launches across D19, D20, and D28.</p>
+  <div class="cta-btns reveal d3">
+    <a href="index.html#projects" class="btn btn-gold btn-arrow">View All Projects</a>
+    <a href="index.html#contact" class="btn btn-outline-dark">Get in Touch</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="assets/logo.png" alt="ManHeng" class="footer-logo-img">
+      <span class="footer-tagline">Homes That Last · Value That Grows</span>
+      <p>Singapore's boutique landed residential developer, crafting freehold homes of enduring quality and long-term value — legacies designed to serve families for generations.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Our Projects</h5>
+      <a href="dafne.html">D15 — 20 Dafne Street</a>
+      <a href="plantation.html">D19 — 3 Plantation Avenue</a>
+      <a href="peirce.html">D20 — Lower Peirce Reservoir Pk</a>
+      <a href="seletar.html">D28 — Seletar Hill Estate</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="index.html#about">About ManHeng</a>
+      <a href="process.html">Design Process</a>
+      <a href="index.html#projects">All Projects</a>
+      <a href="index.html#contact">Contact Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© <span id="footerYear"></span> ManHeng Pte. Ltd. · All Rights Reserved · Singapore</span>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">CEA Disclosure</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>
+  setTimeout(()=>document.getElementById('heroBg').classList.add('loaded'), 80);
+</script>
+</body>
+</html>

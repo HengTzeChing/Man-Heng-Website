@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20 Dafne Street — ManHeng</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+#hero{position:relative;height:100vh;min-height:680px;display:flex;align-items:flex-end;overflow:hidden;background:#0a0604}
+.hero-bg{position:absolute;inset:0;background:url('assets/hqp_dafne.jpg') center 20%/cover no-repeat;transform:scale(1.08);transition:transform 12s ease-out}
+.hero-bg.loaded{transform:scale(1)}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,6,4,.92) 0%,rgba(10,6,4,.08) 55%)}
+.hero-content{position:relative;z-index:2;padding:0 80px 90px;width:100%}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#fff;font-size:8.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;padding:6px 14px;margin-bottom:22px;opacity:0;animation:fadeUp .8s .3s forwards}
+.hero-badge span{width:5px;height:5px;border-radius:50%;background:#fff;flex-shrink:0}
+h1.proj-h{font-family:"Cormorant Garamond",serif;font-size:clamp(44px,5.5vw,76px);font-weight:300;color:#fff;line-height:1.08;letter-spacing:-.02em;opacity:0;animation:fadeUp 1s .5s cubic-bezier(.16,1,.3,1) forwards}
+h1.proj-h em{font-style:italic;color:var(--gold-l)}
+.hero-meta{display:flex;gap:40px;margin-top:24px;opacity:0;animation:fadeUp .9s .7s cubic-bezier(.16,1,.3,1) forwards;flex-wrap:wrap}
+.hero-meta-item{font-size:11px;font-weight:300;color:rgba(255,255,255,.5);letter-spacing:.08em}
+.hero-meta-item strong{display:block;font-size:13px;font-weight:400;color:rgba(255,255,255,.85);margin-top:3px}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+#overview{display:grid;grid-template-columns:1fr 1fr;background:var(--cream)}
+.ov-img{position:relative;overflow:hidden;min-height:600px}
+.ov-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.ov-img:hover img{transform:scale(1.04)}
+.ov-body{padding:100px 80px;display:flex;flex-direction:column;justify-content:center}
+.ov-body h2{margin-bottom:20px}
+.ov-body .body-copy{margin-bottom:32px}
+.specs-table{border:1px solid var(--border)}
+.spec-row{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)}
+.spec-row:last-child{border:none}
+.spec-k{padding:15px 20px;font-size:9px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);background:rgba(184,150,62,.04);border-right:1px solid var(--border)}
+.spec-v{padding:15px 20px;font-family:"Cormorant Garamond",serif;font-size:17px;font-weight:400;color:var(--brown)}
+#gallery{background:var(--brown);padding:100px 0}
+.gal-head{padding:0 80px;margin-bottom:52px}
+.gal-head h2{color:#fff}
+.gal-scroll{display:flex;gap:3px;padding:0 80px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none}
+.gal-scroll::-webkit-scrollbar{display:none}
+.gal-item{flex-shrink:0;scroll-snap-align:start;position:relative;overflow:hidden;background:#0a0604}
+.gal-item.w{width:58vw}.gal-item.n{width:34vw}
+.gal-item img{width:100%;height:500px;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.16,1,.3,1),opacity .4s;opacity:.85}
+.gal-item:hover img{transform:scale(1.05);opacity:.95}
+.gal-label{position:absolute;bottom:0;left:0;right:0;padding:22px 26px;background:linear-gradient(to top,rgba(0,0,0,.72),transparent)}
+.gal-level{font-size:9px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-l);margin-bottom:4px}
+.gal-room{font-family:"Cormorant Garamond",serif;font-size:19px;font-weight:300;font-style:italic;color:#fff}
+.gal-hint{padding:16px 80px 0;font-size:10px;font-weight:300;color:rgba(255,255,255,.28);letter-spacing:.12em;text-align:right}
+#floorplans{padding:120px 80px;background:var(--warm)}
+.fp-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:48px}
+.fp-tab{padding:14px 28px;font-size:10px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:none;transition:all .25s;position:relative}
+.fp-tab.active{color:var(--gold)}
+.fp-tab.active::after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:1px;background:var(--gold)}
+.fp-panels .panel{display:none}
+.fp-panels .panel.active{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.fp-img{background:var(--cream);padding:32px;overflow:hidden}
+.fp-img img{width:100%;display:block;object-fit:contain;max-height:480px}
+.fp-details h3{font-family:"Cormorant Garamond",serif;font-size:32px;font-weight:300;color:var(--brown);margin-bottom:16px}
+.fp-rooms{display:flex;flex-direction:column;gap:0;margin-top:20px}
+.fp-room{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:13px;font-weight:300;color:var(--brown-m)}
+.fp-room-tag{font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);background:var(--gold-pale);padding:3px 8px}
+#amenities{display:grid;grid-template-columns:1fr 1fr;background:var(--cream)}
+.am-map{overflow:hidden;min-height:500px}
+.am-map img{width:100%;height:100%;object-fit:cover;display:block;filter:sepia(6%) contrast(1.05)}
+.am-body{padding:100px 80px;display:flex;flex-direction:column;justify-content:center}
+.am-body h2{margin-bottom:12px}
+.am-tagline{font-family:"Cormorant Garamond",serif;font-size:19px;font-weight:300;font-style:italic;color:var(--brown-m);margin-bottom:40px;line-height:1.5}
+.am-sections{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.am-sec-title{font-size:9px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.am-item{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(0,0,0,.04);font-size:12px;font-weight:300;color:var(--brown-m)}
+.am-dist{font-size:11px;font-weight:500;color:var(--gold);background:var(--gold-pale);padding:2px 7px}
+#specifications{padding:120px 80px;background:var(--warm)}
+.spec-accordion{border:1px solid var(--border)}
+.acc-item{border-bottom:1px solid var(--border)}
+.acc-item:last-child{border:none}
+.acc-trigger{width:100%;display:flex;justify-content:space-between;align-items:center;padding:22px 28px;background:none;border:none;cursor:none;text-align:left;transition:background .25s}
+.acc-trigger:hover{background:var(--gold-pale)}
+.acc-trigger-title{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--brown)}
+.acc-icon{font-size:18px;color:var(--gold);transition:transform .3s;flex-shrink:0}
+.acc-item.open .acc-icon{transform:rotate(45deg)}
+.acc-body{display:none;padding:0 28px 24px}
+.acc-item.open .acc-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.spec-entry{padding:10px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:12.5px;font-weight:300;color:var(--brown-m);line-height:1.7}
+.spec-entry strong{display:block;font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+#enquire{padding:120px 80px;background:var(--brown);display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
+.enq-left h2{color:#fff;margin-bottom:20px}
+.enq-left p{font-size:14px;font-weight:300;color:rgba(255,255,255,.42);line-height:1.9;margin-bottom:32px}
+.enq-form-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:48px}
+.enq-form-h{font-family:"Cormorant Garamond",serif;font-size:24px;font-weight:300;color:#fff;margin-bottom:28px}
+@media(max-width:900px){
+  .hero-content{padding:0 28px 70px}.hero-meta{gap:20px}
+  #overview,#amenities,#enquire{grid-template-columns:1fr}
+  .ov-body,.am-body{padding:60px 28px}.enq-form-wrap{padding:32px 22px}
+  .am-sections{grid-template-columns:1fr}
+  #gallery{padding:80px 0}.gal-head,.gal-scroll,.gal-hint{padding-left:28px;padding-right:28px}
+  .gal-item.w,.gal-item.n{width:78vw}.gal-item img{height:360px}
+  #floorplans,#specifications,#enquire{padding:80px 28px}
+  .fp-panels .panel.active{grid-template-columns:1fr;gap:28px}
+  .acc-item.open .acc-body{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<nav id="mainNav" class="light" data-light>
+  <a href="index.html#projects" class="nav-back"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 3L5 8l5 5"/></svg>All Projects</a>
+  <div class="nav-links">
+    <a href="#overview">Overview</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#floorplans" class="hide-mob">Floor Plans</a>
+    <a href="#amenities" class="hide-mob">Location</a>
+    <a href="#enquire" class="btn-nav">Enquire Now</a>
+  </div>
+</nav>
+<section id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-grad"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span></span>Open for Sale</div>
+    <h1 class="proj-h">D15: Opera Estate<br><em>20 Dafne Street</em></h1>
+    <div class="hero-meta">
+      <div class="hero-meta-item">Type<strong>Terrace House</strong></div>
+      <div class="hero-meta-item">Tenure<strong>Freehold</strong></div>
+      <div class="hero-meta-item">Built-up<strong>Est. 4,263 sqft</strong></div>
+      <div class="hero-meta-item">Est. TOP<strong>Q4 2026</strong></div>
+    </div>
+  </div>
+</section>
+<section id="overview">
+  <div class="ov-img reveal"><img src="assets/hqp_dafne.jpg" alt="20 Dafne Street"></div>
+  <div class="ov-body">
+    <div class="eyebrow reveal">Project Overview</div>
+    <h2 class="section-h reveal d1">A Home Designed<br>for <em>Generations</em></h2>
+    <p class="body-copy reveal d2">A tranquil landed enclave in District 15, offering the charm of East Coast living with excellent connectivity and everyday convenience. Known for its coastal lifestyle, rich heritage, and vibrant food scene — with East Coast Park just minutes away.</p>
+    <p class="body-copy reveal d2">Design direction: <strong>Refined Timber Living</strong> — Quiet Warmth · Timeless Elegance. Each texture carefully considered. Each void deliberately preserved.</p>
+    <div class="specs-table reveal d3" style="margin-top:36px">
+      <div class="spec-row"><div class="spec-k">Type</div><div class="spec-v">Terrace House</div></div>
+      <div class="spec-row"><div class="spec-k">Tenure</div><div class="spec-v">Freehold</div></div>
+      <div class="spec-row"><div class="spec-k">Land Area</div><div class="spec-v">Est. 1,319 sqft</div></div>
+      <div class="spec-row"><div class="spec-k">Built-up</div><div class="spec-v">Est. 4,263 sqft</div></div>
+      <div class="spec-row"><div class="spec-k">Levels</div><div class="spec-v">2 Storey + Mezzanine + Attic</div></div>
+      <div class="spec-row"><div class="spec-k">Bedrooms</div><div class="spec-v">5 Bedrooms + Helper Room</div></div>
+      <div class="spec-row"><div class="spec-k">Bathrooms</div><div class="spec-v">6 Bathrooms</div></div>
+      <div class="spec-row"><div class="spec-k">Car Parks</div><div class="spec-v">2 Car Parks</div></div>
+      <div class="spec-row"><div class="spec-k">Est. TOP &amp; CSC</div><div class="spec-v">Expected Q4 2026</div></div>
+    </div>
+  </div>
+</section>
+<section id="gallery">
+  <div class="gal-head">
+    <div class="eyebrow eyebrow-light reveal">Interior Renders</div>
+    <h2 class="section-h reveal d1" style="color:#fff">Inside the Home.<br><em style="color:rgba(255,255,255,.5)">Every Detail Considered.</em></h2>
+  </div>
+  <div class="gal-scroll">
+    <div class="gal-item w"><img src="assets/hqp25.jpg" alt="Living Room"><div class="gal-label"><div class="gal-level">Level 1</div><div class="gal-room">Living Room — Double Volume Ceilings</div></div></div>
+    <div class="gal-item n"><img src="assets/hqp29.jpg" alt="Kitchen"><div class="gal-label"><div class="gal-level">Level 1</div><div class="gal-room">Dry Kitchen</div></div></div>
+    <div class="gal-item n"><img src="assets/hqp27.jpg" alt="Dining"><div class="gal-label"><div class="gal-level">Level 1</div><div class="gal-room">Dining Room</div></div></div>
+    <div class="gal-item w"><img src="assets/hqp33.jpg" alt="Ensuite Bedroom"><div class="gal-label"><div class="gal-level">Level 2 Mezzanine</div><div class="gal-room">Ensuite Bedroom 1</div></div></div>
+    <div class="gal-item n"><img src="assets/hqp31.jpg" alt="Bedroom"><div class="gal-label"><div class="gal-level">Level 2 Mezzanine</div><div class="gal-room">Bedroom</div></div></div>
+    <div class="gal-item n"><img src="assets/hqp35.jpg" alt="Tea Room"><div class="gal-label"><div class="gal-level">Level 3</div><div class="gal-room">Tea &amp; Coffee Room</div></div></div>
+    <div class="gal-item w"><img src="assets/hqp37.jpg" alt="Master Bedroom"><div class="gal-label"><div class="gal-level">Level 3</div><div class="gal-room">Master Bedroom</div></div></div>
+    <div class="gal-item n"><img src="assets/hqp40.jpg" alt="Master Bathroom"><div class="gal-label"><div class="gal-level">Level 3</div><div class="gal-room">Master Bathroom</div></div></div>
+    <div class="gal-item n"><img src="assets/hqp43.jpg" alt="Junior Master Bath"><div class="gal-label"><div class="gal-level">Level 3</div><div class="gal-room">Junior Master Bathroom</div></div></div>
+    <div class="gal-item w"><img src="assets/hqp45.jpg" alt="Attic"><div class="gal-label"><div class="gal-level">Level 4 — Attic</div><div class="gal-room">Bedroom 5 with Balcony</div></div></div>
+  </div>
+  <div class="gal-hint">← Scroll to explore all rooms</div>
+</section>
+<section id="floorplans">
+  <div style="margin-bottom:60px">
+    <div class="eyebrow reveal">Layout</div>
+    <h2 class="section-h reveal d1">Floor Plans</h2>
+  </div>
+  <div class="fp-tabs">
+    <button class="fp-tab active" onclick="showPanel(0,this)">Level 1</button>
+    <button class="fp-tab" onclick="showPanel(1,this)">Level 2 — Mezzanine</button>
+    <button class="fp-tab" onclick="showPanel(2,this)">Level 3</button>
+    <button class="fp-tab" onclick="showPanel(3,this)">Level 4 — Attic</button>
+  </div>
+  <div class="fp-panels">
+    <div class="panel active reveal">
+      <div class="fp-img"><img src="assets/hqp21.jpg" alt="Level 1 Floor Plan"></div>
+      <div class="fp-details">
+        <h3>Level 1 — Ground Floor</h3>
+        <p class="body-copy" style="margin-bottom:20px">A magnificent full-width living hall with soaring double-volume ceilings, a generous dining room for 8–10, and a well-designed kitchen for daily cooking.</p>
+        <div class="fp-rooms">
+          <div class="fp-room"><span>Living Hall</span><span class="fp-room-tag">Double Volume</span></div>
+          <div class="fp-room"><span>Dining Room</span><span class="fp-room-tag">8–10 Seater</span></div>
+          <div class="fp-room"><span>Dry &amp; Wet Kitchen</span><span class="fp-room-tag">Level 1</span></div>
+          <div class="fp-room"><span>Helper's Room + Bathroom</span><span class="fp-room-tag">Level 1</span></div>
+          <div class="fp-room"><span>Car Porch (2 Cars)</span><span class="fp-room-tag">Basement</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel reveal">
+      <div class="fp-img"><img src="assets/hqp23.jpg" alt="Level 2 Floor Plan"></div>
+      <div class="fp-details">
+        <h3>Level 2 — Mezzanine</h3>
+        <p class="body-copy" style="margin-bottom:20px">Two ensuite bedrooms designed for seamless access to personal amenities — relaxing retreats where style, functionality and comfort meet.</p>
+        <div class="fp-rooms">
+          <div class="fp-room"><span>Ensuite Bedroom 1</span><span class="fp-room-tag">Ensuite Bath</span></div>
+          <div class="fp-room"><span>Ensuite Bedroom 2</span><span class="fp-room-tag">Ensuite Bath</span></div>
+          <div class="fp-room"><span>Void to Living Hall</span><span class="fp-room-tag">Double Volume</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel reveal">
+      <div class="fp-img"><img src="assets/hqp37.jpg" alt="Level 3" style="max-height:340px;object-fit:cover;width:100%"></div>
+      <div class="fp-details">
+        <h3>Level 3</h3>
+        <p class="body-copy" style="margin-bottom:20px">The master suite level — his-and-hers master bathroom with bathtub, smart toilet, and a private tea & coffee room.</p>
+        <div class="fp-rooms">
+          <div class="fp-room"><span>Master Bedroom</span><span class="fp-room-tag">His &amp; Hers</span></div>
+          <div class="fp-room"><span>Master Bathroom</span><span class="fp-room-tag">Bathtub + Smart WC</span></div>
+          <div class="fp-room"><span>Junior Master Bedroom</span><span class="fp-room-tag">Ensuite Bath</span></div>
+          <div class="fp-room"><span>Tea / Coffee Room</span><span class="fp-room-tag">Pantry</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel reveal">
+      <div class="fp-img"><img src="assets/hqp45.jpg" alt="Attic" style="max-height:340px;object-fit:cover;width:100%"></div>
+      <div class="fp-details">
+        <h3>Level 4 — Attic</h3>
+        <p class="body-copy" style="margin-bottom:20px">A versatile entertainment room with balcony that can be converted into Bedroom 5 — adaptable to your family's evolving needs.</p>
+        <div class="fp-rooms">
+          <div class="fp-room"><span>Bedroom 5 / Entertainment</span><span class="fp-room-tag">Flexible</span></div>
+          <div class="fp-room"><span>Private Balcony</span><span class="fp-room-tag">Outdoor</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="amenities">
+  <div class="am-map reveal"><img src="assets/hqp6.jpg" alt="Location Map"></div>
+  <div class="am-body">
+    <div class="eyebrow reveal">Location</div>
+    <h2 class="section-h reveal d1">Seamless<br><em>Connectivity</em></h2>
+    <p class="am-tagline reveal d2">"A highly sought-after enclave known for its coastal lifestyle, rich heritage, and vibrant food scene."</p>
+    <div class="am-sections reveal d3">
+      <div>
+        <div class="am-sec-title">MRT Stations</div>
+        <div class="am-item"><span>EW5 Bedok</span><span class="am-dist">0.54 km</span></div>
+        <div class="am-item"><span>TE28 Siglap</span><span class="am-dist">1.20 km</span></div>
+        <div class="am-item"><span>EW6 Kembangan</span><span class="am-dist">1.55 km</span></div>
+      </div>
+      <div>
+        <div class="am-sec-title">Primary Schools</div>
+        <div class="am-item"><span>Opera Estate Pri.</span><span class="am-dist">0.35 km</span></div>
+        <div class="am-item"><span>St. Stephen's School</span><span class="am-dist">1.08 km</span></div>
+        <div class="am-item"><span>Fengshan Primary</span><span class="am-dist">1.19 km</span></div>
+      </div>
+      <div>
+        <div class="am-sec-title">Secondary Schools</div>
+        <div class="am-item"><span>Victoria School</span><span class="am-dist">1.29 km</span></div>
+        <div class="am-item"><span>St. Patrick's School</span><span class="am-dist">1.72 km</span></div>
+        <div class="am-item"><span>Bedok Green Sec.</span><span class="am-dist">1.82 km</span></div>
+      </div>
+      <div>
+        <div class="am-sec-title">Supermarkets &amp; Dining</div>
+        <div class="am-item"><span>Prime Supermarket</span><span class="am-dist">0.45 km</span></div>
+        <div class="am-item"><span>NTUC FairPrice</span><span class="am-dist">0.56 km</span></div>
+        <div class="am-item"><span>Baker &amp; Cook Café</span><span class="am-dist">0.40 km</span></div>
+        <div class="am-item"><span>Le Petit Paris</span><span class="am-dist">0.40 km</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="specifications">
+  <div style="margin-bottom:56px">
+    <div class="eyebrow reveal">Full Specifications</div>
+    <h2 class="section-h reveal d1">Materials &amp; <em>Finishes</em></h2>
+  </div>
+  <div class="spec-accordion reveal d2">
+    <div class="acc-item open">
+      <button class="acc-trigger" onclick="toggleAcc(this)"><span class="acc-trigger-title">Floor Finishes</span><span class="acc-icon">+</span></button>
+      <div class="acc-body">
+        <div class="spec-entry"><strong>Common Bathroom, Kitchen, Yard, Helper's Room</strong>Homogenous Tiles</div>
+        <div class="spec-entry"><strong>Master Bathroom, Living &amp; Dining, Lift Floor, Car Porch</strong>Homogenous Tiles</div>
+        <div class="spec-entry"><strong>Balcony</strong>Homogenous Tiles</div>
+        <div class="spec-entry"><strong>TV Console Wall &amp; Bathroom / Kitchen Walls</strong>Homogenous Tiles</div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggleAcc(this)"><span class="acc-trigger-title">Ceiling</span><span class="acc-icon">+</span></button>
+      <div class="acc-body">
+        <div class="spec-entry"><strong>All Areas</strong>9mm thick Fibrous Plaster Board</div>
+        <div class="spec-entry"><strong>All Bathrooms</strong>9mm thick Moisture Fibrous Plaster Board</div>
+        <div class="spec-entry"><strong>RC Ledge</strong>Skim coat with painting to existing concrete slab soffit</div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggleAcc(this)"><span class="acc-trigger-title">Sanitary Fittings</span><span class="acc-icon">+</span></button>
+      <div class="acc-body">
+        <div class="spec-entry"><strong>Brand</strong>Bravat / Johnson Suisse or Equivalent</div>
+        <div class="spec-entry"><strong>WC</strong>Wall Hung Closed Coupled</div>
+        <div class="spec-entry"><strong>Basin, Tap, Bidet, Shower Set</strong>Bravat / equivalent</div>
+        <div class="spec-entry"><strong>Kitchen Sink &amp; Tap</strong>Bravat / equivalent</div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggleAcc(this)"><span class="acc-trigger-title">Doors &amp; Windows</span><span class="acc-icon">+</span></button>
+      <div class="acc-body">
+        <div class="spec-entry"><strong>Main Entrance Door</strong>Solid Core Timber with Veneer finishes</div>
+        <div class="spec-entry"><strong>Bedroom &amp; Bathroom Doors</strong>Semi Solid Core Timber with Veneer finishes</div>
+        <div class="spec-entry"><strong>Windows &amp; Sliding Doors</strong>Aluminum powder coated with clear glass</div>
+        <div class="spec-entry"><strong>Balcony &amp; Staircase</strong>Glass Railing</div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggleAcc(this)"><span class="acc-trigger-title">Carpentry Work</span><span class="acc-icon">+</span></button>
+      <div class="acc-body">
+        <div class="spec-entry"><strong>Finish</strong>Laminate Ext. / PVC Int. / Solid Surface Top</div>
+        <div class="spec-entry"><strong>Living Hall</strong>TV Console and Cabinet</div>
+        <div class="spec-entry"><strong>Kitchen</strong>Wet and Dry Kitchen Cabinet</div>
+        <div class="spec-entry"><strong>All Bathrooms (excl. maid)</strong>Vanity Top and Mirror</div>
+        <div class="spec-entry"><strong>All Bedrooms (excl. maid)</strong>Bedroom Wardrobe</div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggleAcc(this)"><span class="acc-trigger-title">Painting</span><span class="acc-icon">+</span></button>
+      <div class="acc-body">
+        <div class="spec-entry"><strong>Internal &amp; External</strong>Nippon Paint / SKK Paint</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="enquire">
+  <div class="enq-left">
+    <div class="eyebrow eyebrow-light reveal">Interested?</div>
+    <h2 class="section-h reveal d1" style="color:#fff">Enquire About<br><em style="color:rgba(255,255,255,.5)">20 Dafne Street</em></h2>
+    <p class="reveal d2" style="font-size:14px;font-weight:300;color:rgba(255,255,255,.42);line-height:1.9;margin-bottom:32px">Register your interest or request a private viewing. Our team will reach out with full details, pricing, and availability.</p>
+    <a href="index.html#projects" class="btn btn-outline-light reveal d3">Back to All Projects</a>
+  </div>
+  <div class="enq-form-wrap reveal d2">
+    <div class="enq-form-h">Request a Viewing</div>
+    <div id="enq-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:22px">
+        <div class="fg"><label>First Name</label><input type="text" placeholder="First name"></div>
+        <div class="fg"><label>Last Name</label><input type="text" placeholder="Last name"></div>
+      </div>
+      <div class="fg"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+      <div class="fg"><label>Phone</label><input type="tel" placeholder="+65 9XXX XXXX"></div>
+      <div class="fg"><label>Enquiry Type</label><select><option>Request a Viewing</option><option>Pricing &amp; Availability</option><option>General Enquiry</option></select></div>
+      <div class="fg"><label>Message</label><textarea placeholder="Tell us more about what you're looking for..."></textarea></div>
+      <button class="btn btn-gold" style="width:100%;justify-content:center;margin-top:6px" onclick="submitForm('enq-body','enq-success')">Submit Enquiry</button>
+      <p class="form-note">We respect your privacy.</p>
+    </div>
+    <div class="success-box" id="enq-success"><div class="check">✓</div><h4>Thank You</h4><p>Our team will be in touch shortly regarding 20 Dafne Street.</p></div>
+  </div>
+</section>
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="assets/logo.png" alt="ManHeng" class="footer-logo-img">
+      <span class="footer-tagline">Homes That Last · Value That Grows</span>
+      <p>Singapore's boutique landed residential developer, crafting freehold homes of enduring quality and long-term value.</p>
+    </div>
+    <div class="footer-col">
+      <h5>All Projects</h5>
+      <a href="dafne.html">D15 — 20 Dafne Street</a>
+      <a href="plantation.html">D19 — 3 Plantation Avenue</a>
+      <a href="peirce.html">D20 — Lower Peirce Reservoir Pk</a>
+      <a href="seletar.html">D28 — Seletar Hill Estate</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="index.html#about">About ManHeng</a>
+      <a href="process.html">Design Process</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© <span id="footerYear"></span> ManHeng Pte. Ltd. · All Rights Reserved · Singapore</span>
+    <div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">CEA Disclosure</a></div>
+  </div>
+</footer>
+<script src="assets/main.js"></script>
+<script>
+  setTimeout(()=>document.getElementById('heroBg').classList.add('loaded'),80);
+  function showPanel(idx,btn){document.querySelectorAll('.fp-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.panel')[idx].classList.add('active')}
+  function toggleAcc(btn){const item=btn.closest('.acc-item');const wasOpen=item.classList.contains('open');document.querySelectorAll('.acc-item').forEach(i=>i.classList.remove('open'));if(!wasOpen)item.classList.add('open')}
+</script>
+</body></html>

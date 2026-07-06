@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ManHeng — Homes That Last · Value That Grows</title>
+<meta name="description" content="ManHeng is a Singapore landed residential developer with over 20 years of experience crafting freehold homes of enduring quality and long-term value.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+
+/* ── HERO CAROUSEL ── */
+#hero{position:relative;height:100vh;min-height:680px;display:flex;align-items:center;overflow:hidden;background:#0a0604}
+
+/* Slide stack */
+.hero-slides{position:absolute;inset:0}
+.hero-slide{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  opacity:0;
+  transform:scale(1.08);
+  transition:opacity 1.2s cubic-bezier(.4,0,.2,1), transform 8s ease-out;
+  will-change:opacity,transform;
+}
+.hero-slide.active{
+  opacity:1;
+  transform:scale(1.0);
+}
+.hero-slide.prev{
+  opacity:0;
+  transform:scale(1.04);
+}
+
+.hero-grad{position:absolute;inset:0;background:linear-gradient(110deg,rgba(10,6,4,.78) 0%,rgba(10,6,4,.18) 55%,rgba(10,6,4,.48) 100%);z-index:1}
+
+/* Slide indicators */
+.hero-indicators{
+  position:absolute;bottom:48px;left:80px;
+  display:flex;gap:10px;z-index:3;
+}
+.hero-dot{
+  width:24px;height:2px;background:rgba(255,255,255,.3);
+  border:none;padding:0;cursor:none;
+  transition:background .3s,width .4s cubic-bezier(.16,1,.3,1);
+}
+.hero-dot.active{background:var(--gold);width:48px}
+
+/* Slide counter */
+.hero-counter{
+  position:absolute;bottom:52px;right:80px;z-index:3;
+  font-size:10px;font-weight:300;letter-spacing:.15em;
+  color:rgba(255,255,255,.4);
+}
+.hero-counter span{color:rgba(255,255,255,.75);font-weight:400}
+.hero-content{position:relative;z-index:2;padding:0 80px;max-width:800px}
+.hero-label{display:flex;align-items:center;gap:16px;font-size:9px;font-weight:500;letter-spacing:.35em;text-transform:uppercase;color:var(--gold-l);margin-bottom:28px;opacity:0;transform:translateY(18px);animation:fadeUp .9s .3s cubic-bezier(.16,1,.3,1) forwards}
+.hero-label::before{content:'';width:44px;height:1px;background:var(--gold-l)}
+h1.hero-h{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,6.5vw,88px);font-weight:300;line-height:1.06;letter-spacing:-.02em;color:#fff;opacity:0;transform:translateY(28px);animation:fadeUp 1s .5s cubic-bezier(.16,1,.3,1) forwards}
+h1.hero-h em{font-style:italic;color:var(--gold-l)}
+.hero-sub{font-size:14px;font-weight:300;line-height:1.9;color:rgba(255,255,255,.6);letter-spacing:.04em;margin-top:24px;max-width:480px;opacity:0;transform:translateY(18px);animation:fadeUp 1s .7s cubic-bezier(.16,1,.3,1) forwards}
+.hero-ctas{display:flex;gap:14px;margin-top:44px;opacity:0;transform:translateY(18px);animation:fadeUp 1s .9s cubic-bezier(.16,1,.3,1) forwards}
+.hero-scroll{position:absolute;right:60px;bottom:48px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px}
+.scroll-line{width:1px;height:52px;background:rgba(255,255,255,.15);position:relative;overflow:hidden}
+.scroll-line::after{content:'';position:absolute;top:-100%;width:100%;height:100%;background:var(--gold-l);animation:scrollDown 2s ease-in-out infinite}
+@keyframes scrollDown{0%{top:-100%}100%{top:100%}}
+.scroll-txt{font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.35);writing-mode:vertical-rl}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+
+/* ── STATS ── */
+#stats{background:var(--brown);display:grid;grid-template-columns:repeat(4,1fr)}
+.stat-item{padding:60px 40px;text-align:center;border-right:1px solid rgba(255,255,255,.06);transition:background .3s}
+.stat-item:last-child{border:none}
+.stat-item:hover{background:rgba(255,255,255,.03)}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:58px;font-weight:300;color:var(--gold-l);line-height:1;display:flex;align-items:flex-start;justify-content:center;gap:2px}
+.stat-num sup{font-size:26px;margin-top:8px}
+.stat-lbl{font-size:9px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-top:10px}
+
+/* ── ABOUT (merged with philosophy) ── */
+#about{background:var(--warm)}
+
+/* Part 2: Pillars — 4 across on dark */
+.about-pillars-wrap{background:var(--brown);padding:100px 80px}
+.pillars-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.06);margin-top:56px}
+.pillar{background:var(--brown);padding:40px 32px;transition:background .3s}
+.pillar:hover{background:rgba(255,255,255,.04)}
+.pillar-n{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:var(--gold);opacity:.5;line-height:1;margin-bottom:20px}
+.pillar-t{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#fff;margin-bottom:10px}
+.pillar-d{font-size:12px;font-weight:300;color:rgba(255,255,255,.38);line-height:1.75}
+
+/* Part 3: Philosophy — full width quote + values */
+.about-philosophy{display:grid;grid-template-columns:52% 48%}
+.phil-visual{position:relative;overflow:hidden;min-height:600px}
+.phil-visual img{width:100%;height:100%;object-fit:cover;opacity:.6;filter:sepia(12%);display:block;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.phil-visual:hover img{transform:scale(1.04);opacity:.7}
+.phil-visual-overlay{position:absolute;inset:0;background:linear-gradient(to right,transparent,rgba(10,6,4,.6))}
+.phil-body{padding:100px 72px;background:var(--brown);display:flex;flex-direction:column;justify-content:center}
+.phil-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2.2vw,34px);font-weight:300;font-style:italic;color:#fff;line-height:1.5;letter-spacing:-.01em;margin:22px 0 12px;padding-left:24px;border-left:2px solid var(--gold)}
+.phil-attr{font-size:10px;font-weight:300;letter-spacing:.18em;color:rgba(255,255,255,.3);margin-bottom:52px}
+.phil-vals{display:flex;flex-direction:column}
+.phil-val{padding:24px 0;border-bottom:1px solid rgba(255,255,255,.07);display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start}
+.phil-val:first-child{border-top:1px solid rgba(255,255,255,.07)}
+.val-n{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--gold);line-height:1;padding-top:2px}
+.val-t{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#fff;margin-bottom:5px}
+.val-d{font-size:12px;font-weight:300;color:rgba(255,255,255,.38);line-height:1.8}
+
+/* Part 4: Design Direction — cream full-width strip */
+.about-direction{padding:100px 80px;background:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.direction-text h2{margin-bottom:20px}
+.direction-keywords{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0}
+.kw{padding:8px 18px;border:1px solid var(--border);font-size:10px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--brown-m)}
+.direction-steps{display:flex;flex-direction:column;gap:0;border:1px solid var(--border)}
+.dir-step{display:grid;grid-template-columns:48px 1fr;gap:16px;align-items:start;padding:20px 24px;border-bottom:1px solid var(--border);transition:background .25s}
+.dir-step:last-child{border:none}
+.dir-step:hover{background:rgba(184,150,62,.05)}
+.dir-step-n{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--gold);line-height:1;padding-top:2px}
+.dir-step-t{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--brown);margin-bottom:5px}
+.dir-step-d{font-size:12px;font-weight:300;color:var(--muted);line-height:1.7}
+
+/* ── PROCESS ── */
+#process{padding:120px 80px;background:var(--warm)}
+.process-head{max-width:600px;margin-bottom:80px}
+.process-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--border)}
+.process-step{padding:40px 28px;border-right:1px solid var(--border);transition:background .3s}
+.process-step:last-child{border:none}
+.process-step:hover{background:var(--cream)}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:var(--gold);opacity:.4;line-height:1;margin-bottom:18px}
+.step-img{width:100%;aspect-ratio:1;object-fit:cover;margin-bottom:16px;filter:sepia(8%) contrast(1.05);transition:filter .3s}
+.process-step:hover .step-img{filter:none}
+.step-title{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--brown);margin-bottom:10px;line-height:1.4}
+.step-item{font-size:11px;font-weight:300;color:var(--muted);line-height:1.6;padding:2px 0}
+
+/* ── PROJECTS ── */
+#projects{padding:120px 0;background:var(--cream)}
+.proj-head{padding:0 80px;display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:72px}
+.proj-sub{max-width:280px;font-size:13px;font-weight:300;color:var(--muted);line-height:1.8;text-align:right}
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.proj-card{position:relative;overflow:hidden;background:#0a0604;cursor:none;display:block;text-decoration:none}
+.proj-card img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .5s;opacity:.84}
+.proj-card:hover img{transform:scale(1.07);opacity:.58}
+.proj-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,6,4,.93) 0%,rgba(10,6,4,.05) 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:40px}
+.proj-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;margin-bottom:16px;font-size:8.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;width:fit-content}
+.badge-sale{background:var(--gold);color:#fff}
+.badge-up{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.2)}
+.badge-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+.proj-dist{font-size:9.5px;font-weight:400;letter-spacing:.2em;color:var(--gold-l);text-transform:uppercase;margin-bottom:8px}
+.proj-name{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:#fff;line-height:1.15;margin-bottom:6px}
+.proj-type{font-size:11.5px;font-weight:300;color:rgba(255,255,255,.45);margin-bottom:28px}
+.proj-footer{display:flex;justify-content:space-between;align-items:center;padding-top:18px;border-top:1px solid rgba(255,255,255,.1)}
+.proj-top-lbl{font-size:9.5px;font-weight:300;color:rgba(255,255,255,.38);letter-spacing:.08em}
+.proj-top-val{font-size:12px;font-weight:400;color:rgba(255,255,255,.75);margin-top:2px}
+.proj-cta{opacity:0;transform:translateX(8px);transition:all .3s cubic-bezier(.16,1,.3,1)}
+.proj-card:hover .proj-cta{opacity:1;transform:none}
+.proj-cta-btn{display:inline-block;padding:10px 20px;background:var(--gold);color:#fff;font-family:'Jost',sans-serif;font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;border:none;cursor:none;text-decoration:none;transition:background .2s}
+.proj-cta-btn:hover{background:#9a7c30}
+
+/* Contact styles in shared style.css */
+
+@media(max-width:900px){
+  .hero-content{padding:0 28px}
+  .hero-scroll{right:24px;bottom:32px}
+  #stats{grid-template-columns:1fr 1fr}
+  .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.06);padding:40px 20px}
+  
+  .about-pillars-wrap{padding:60px 28px}
+  .pillars-grid{grid-template-columns:1fr 1fr}
+  .about-philosophy{grid-template-columns:1fr}
+  .phil-visual{height:55vw}
+  .phil-body{padding:60px 28px}
+  .about-direction{grid-template-columns:1fr;padding:60px 28px;gap:40px}
+  #process{padding:80px 28px}
+  .process-steps{grid-template-columns:1fr}
+  .process-step{border-right:none;border-bottom:1px solid var(--border)}
+  #projects{padding:80px 0}
+  .proj-head{padding:0 28px;flex-direction:column;align-items:flex-start;gap:12px}
+  .proj-sub{text-align:left}
+  .proj-grid{grid-template-columns:1fr}
+  #contact{grid-template-columns:1fr;padding:80px 28px;gap:48px}
+  .ct-form-wrap{padding:32px 22px}
+  .fgl-row{grid-template-columns:1fr}
+}
+
+
+
+/* ── Full-width philosophy section ── */
+.about-philosophy-full{
+  background:var(--brown);
+  padding:120px 80px;
+}
+.phil-full-inner{
+  max-width:900px;
+  margin:0 auto;
+}
+.phil-full-quote{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,3.2vw,48px);
+  font-weight:300;font-style:italic;
+  color:#fff;line-height:1.4;letter-spacing:-.01em;
+  margin:24px 0 16px;
+  padding-left:32px;
+  border-left:2px solid var(--gold);
+}
+.phil-full-attr{
+  font-size:11px;font-weight:300;letter-spacing:.2em;
+  color:rgba(255,255,255,.35);
+  margin-bottom:56px;padding-left:32px;
+}
+.phil-full-paragraphs{
+  display:flex;flex-direction:column;gap:28px;
+  padding-left:32px;
+  border-left:1px solid rgba(255,255,255,.08);
+}
+.phil-full-paragraphs p{
+  font-size:16px;font-weight:300;line-height:1.9;
+  color:rgba(255,255,255,.65);
+  font-style:italic;
+  letter-spacing:.01em;
+}
+@media(max-width:900px){
+  .about-philosophy-full{padding:80px 28px}
+  .phil-full-quote{font-size:clamp(24px,5vw,36px)}
+  .phil-full-paragraphs p{font-size:14px}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="mainNav" class="light" data-light>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/logo.png" alt="ManHeng" class="nav-logo-img">
+    <div><div class="logo-name">MANHENG</div><span class="logo-tag">Homes That Last · Value That Grows</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="#about" class="hide-mob">About</a>
+    <a href="process.html" class="hide-mob">Process</a>
+    <a href="#projects" class="hide-mob">Projects</a>
+    <a href="#contact" class="btn-nav">Enquire</a>
+  </div>
+</nav>
+
+<!-- HERO CAROUSEL -->
+<section id="hero">
+  <!-- Slide stack -->
+  <div class="hero-slides" id="heroSlides">
+    <div class="hero-slide active" style="background-image:url('assets/hero_slide1.jpg');background-position:center 30%"></div>
+    <div class="hero-slide" style="background-image:url('assets/hero_slide2.jpg');background-position:center 25%"></div>
+    <div class="hero-slide" style="background-image:url('assets/hero_slide3.jpg');background-position:center 20%"></div>
+    <div class="hero-slide" style="background-image:url('assets/hero_slide4.jpg');background-position:center 30%"></div>
+  </div>
+
+  <div class="hero-grad"></div>
+
+  <!-- Text content -->
+  <div class="hero-content" style="position:relative;z-index:2">
+    <div class="hero-label">Singapore Landed Residential Developer · Est. 2004</div>
+    <h1 class="hero-h">Crafting Homes<br>That <em>Endure.</em></h1>
+    <p class="hero-sub">Over 20 years creating freehold landed residences across Singapore's most coveted districts — where spatial design meets enduring quality.</p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-gold btn-arrow">Our Projects</a>
+      <a href="#about" class="btn btn-outline-light">Our Story</a>
+    </div>
+  </div>
+
+  <!-- Dot indicators -->
+  <div class="hero-indicators" id="heroDots">
+    <button class="hero-dot active" onclick="goToSlide(0)"></button>
+    <button class="hero-dot" onclick="goToSlide(1)"></button>
+    <button class="hero-dot" onclick="goToSlide(2)"></button>
+    <button class="hero-dot" onclick="goToSlide(3)"></button>
+  </div>
+
+  <!-- Counter -->
+  <div class="hero-counter"><span id="slideNum">01</span> / 04</div>
+
+  <div class="hero-scroll" style="z-index:3"><div class="scroll-line"></div><span class="scroll-txt">Scroll</span></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-inner">
+    <span>20+ Years Experience</span><span>Freehold Properties</span><span>D15 Opera Estate</span><span>D19 Serangoon Garden</span><span>D20 Lower Peirce</span><span>D28 Seletar Hill</span><span>Landed Residential</span><span>Refined Timber Living</span><span>Quiet Warmth</span><span>Timeless Elegance</span>
+    <span>20+ Years Experience</span><span>Freehold Properties</span><span>D15 Opera Estate</span><span>D19 Serangoon Garden</span><span>D20 Lower Peirce</span><span>D28 Seletar Hill</span><span>Landed Residential</span><span>Refined Timber Living</span><span>Quiet Warmth</span><span>Timeless Elegance</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div id="stats">
+  <div class="stat-item reveal"><div class="stat-num">20<sup>+</sup></div><div class="stat-lbl">Years of Experience</div></div>
+  <div class="stat-item reveal d1"><div class="stat-num">4</div><div class="stat-lbl">Active Projects</div></div>
+  <div class="stat-item reveal d2"><div class="stat-num">4</div><div class="stat-lbl">Prime Districts</div></div>
+  <div class="stat-item reveal d3"><div class="stat-num">100<sup>%</sup></div><div class="stat-lbl">Freehold Tenure</div></div>
+</div>
+
+<!-- ════════════════════════════════
+     ABOUT — merged with Philosophy
+     ════════════════════════════════ -->
+<section id="about">
+
+  <!-- 2. Four Pillars — dark band -->
+  <div class="about-pillars-wrap">
+    <div class="eyebrow eyebrow-light reveal" style="justify-content:center">What We Stand For</div>
+    <div class="pillars-grid">
+      <div class="pillar reveal d1">
+        <div class="pillar-n">01</div>
+        <div class="pillar-t">Enduring Quality</div>
+        <div class="pillar-d">Every material and finish selected for longevity, craftsmanship, and timelessness beyond trends.</div>
+      </div>
+      <div class="pillar reveal d2">
+        <div class="pillar-n">02</div>
+        <div class="pillar-t">Spatial Integrity</div>
+        <div class="pillar-d">Each home shaped by its locality, land size, layout, and how families truly live day to day.</div>
+      </div>
+      <div class="pillar reveal d3">
+        <div class="pillar-n">03</div>
+        <div class="pillar-t">Long-Term Value</div>
+        <div class="pillar-d">Homes designed to preserve and enhance value across generations — a true financial legacy.</div>
+      </div>
+      <div class="pillar reveal d4">
+        <div class="pillar-n">04</div>
+        <div class="pillar-t">Lasting Legacy</div>
+        <div class="pillar-d">More than houses — spaces crafted to serve as legacies for Singapore families for generations to come.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Philosophy — full width -->
+  <div class="about-philosophy-full">
+    <div class="phil-full-inner">
+      <div class="eyebrow eyebrow-light reveal">Design Philosophy</div>
+      <blockquote class="phil-full-quote reveal d1">"A return to pure, natural simplicity — through the removal of excess and ornamentation."</blockquote>
+      <p class="phil-full-attr reveal d2">Interior Styling Concept · ManHeng · Refined Timber Living</p>
+      <div class="phil-full-paragraphs reveal d3">
+        <p>ManHeng is driven by a clear mission: to build homes that endure, and a vision to design residences that grow in value over time. Backed by a team with more than 20 years of experience in real estate and construction, this extensive exposure provides a nuanced understanding of the strengths and limitations across different property types, enabling thoughtful, well-informed design and development decisions.</p>
+        <p>At the heart of ManHeng lies a deep appreciation for spatial design and the true meaning of quality living. Each home is carefully curated to reflect its unique character, shaped by its locality, land size, layout, and functionality. Every detail is intentionally considered to maximize comfort, efficiency, and livability — balancing aesthetic refinement with practical everyday use.</p>
+        <p>ManHeng believes that a well-designed home should not only elevate lifestyle but also preserve and enhance long-term value. Through meticulous planning and a commitment to excellence, the team seeks to unlock the full potential of every property, revealing its inherent strengths and distinct identity.</p>
+        <p>More than just building houses, ManHeng is dedicated to crafting homes that stand the test of time — spaces designed to appreciate in value and serve as a lasting legacy for generations to come.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Design Direction -->
+  <div class="about-direction">
+    <div class="direction-text">
+      <div class="eyebrow reveal">Design Direction</div>
+      <h2 class="section-h reveal d1">Refined<br><em>Timber Living</em></h2>
+      <p class="body-copy reveal d2">Each texture is carefully considered. Each void is deliberately preserved. ManHeng homes speak the language of warmth and restraint — timeless spaces where quality of life is felt, not performed.</p>
+      <div class="direction-keywords reveal d3">
+        <span class="kw">Quiet Warmth</span>
+        <span class="kw">Timeless Elegance</span>
+        <span class="kw">Natural Materials</span>
+        <span class="kw">Refined Simplicity</span>
+      </div>
+    </div>
+    <div class="direction-steps reveal d2">
+      <div class="dir-step">
+        <div class="dir-step-n">1</div>
+        <div><div class="dir-step-t">Project Requirements</div><div class="dir-step-d">Occupancy profile, lifestyle needs, and evolution of spatial functions over time.</div></div>
+      </div>
+      <div class="dir-step">
+        <div class="dir-step-n">2</div>
+        <div><div class="dir-step-t">Spatial Planning</div><div class="dir-step-d">Zoning, circulation flow, natural ventilation and daylighting strategy.</div></div>
+      </div>
+      <div class="dir-step">
+        <div class="dir-step-n">3</div>
+        <div><div class="dir-step-t">Spatial Experience</div><div class="dir-step-d">Architectural finishes, interior styling, colour and material palette selection.</div></div>
+      </div>
+      <div class="dir-step">
+        <div class="dir-step-n">4</div>
+        <div><div class="dir-step-t">Lifestyle Amenities</div><div class="dir-step-d">Water, electrical, safety systems, and lighting design for daily living.</div></div>
+      </div>
+      <div class="dir-step">
+        <div class="dir-step-n">5</div>
+        <div><div class="dir-step-t">Design Implementation</div><div class="dir-step-d">Material selection, cost management, detailed drawings, and project delivery.</div></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="proj-head">
+    <div>
+      <div class="eyebrow reveal">Our Portfolio</div>
+      <h2 class="section-h reveal d1">Current &amp;<br>Upcoming Projects</h2>
+    </div>
+    <p class="proj-sub reveal d2">Freehold landed homes across Singapore's most coveted residential districts.</p>
+  </div>
+  <div class="proj-grid">
+
+    <a class="proj-card reveal" href="dafne.html">
+      <img src="assets/hqp_dafne.jpg" alt="20 Dafne Street D15 Opera Estate">
+      <div class="proj-overlay">
+        <div class="proj-badge badge-sale"><span class="badge-dot"></span>Open for Sale</div>
+        <div class="proj-dist">D15 — Opera Estate</div>
+        <div class="proj-name">20 Dafne Street</div>
+        <div class="proj-type">Terrace House · Freehold · 5 Bed · 4,263 sqft</div>
+        <div class="proj-footer">
+          <div><div class="proj-top-lbl">Est. TOP</div><div class="proj-top-val">Q4 2026</div></div>
+          <div class="proj-cta"><span class="proj-cta-btn">View Project →</span></div>
+        </div>
+      </div>
+    </a>
+
+    <a class="proj-card reveal d1" href="plantation.html">
+      <img src="assets/hqp_plantation.jpg" alt="3 Plantation Avenue D19 Serangoon Garden">
+      <div class="proj-overlay">
+        <div class="proj-badge badge-up"><span class="badge-dot"></span>Upcoming</div>
+        <div class="proj-dist">D19 — Serangoon Garden Estate</div>
+        <div class="proj-name">3 Plantation Avenue</div>
+        <div class="proj-type">Terrace House · Freehold</div>
+        <div class="proj-footer">
+          <div><div class="proj-top-lbl">Est. TOP</div><div class="proj-top-val">Q2/Q3 2027</div></div>
+          <div class="proj-cta"><span class="proj-cta-btn">View Project →</span></div>
+        </div>
+      </div>
+    </a>
+
+    <a class="proj-card reveal d2" href="peirce.html">
+      <img src="assets/hqp_peirce.jpg" alt="Lower Peirce Reservoir Park D20">
+      <div class="proj-overlay">
+        <div class="proj-badge badge-up"><span class="badge-dot"></span>Upcoming</div>
+        <div class="proj-dist">D20 — Lower Peirce Reservoir Pk</div>
+        <div class="proj-name">Lower Peirce<br>Reservoir Park</div>
+        <div class="proj-type">Terrace House · Freehold</div>
+        <div class="proj-footer">
+          <div><div class="proj-top-lbl">Est. TOP</div><div class="proj-top-val">Q4 2027</div></div>
+          <div class="proj-cta"><span class="proj-cta-btn">View Project →</span></div>
+        </div>
+      </div>
+    </a>
+
+    <a class="proj-card reveal d3" href="seletar.html">
+      <img src="assets/hqp_seletar.jpg" alt="Seletar Hill Estate D28">
+      <div class="proj-overlay">
+        <div class="proj-badge badge-up"><span class="badge-dot"></span>Upcoming</div>
+        <div class="proj-dist">D28 — Seletar Hill Estate</div>
+        <div class="proj-name">Seletar Hill Estate</div>
+        <div class="proj-type">Terrace House · Freehold</div>
+        <div class="proj-footer">
+          <div><div class="proj-top-lbl">Est. TOP</div><div class="proj-top-val">Q1 2028</div></div>
+          <div class="proj-cta"><span class="proj-cta-btn">View Project →</span></div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-left">
+    <div class="eyebrow reveal">Get in Touch</div>
+    <h2 class="section-h reveal d1">Register Your<br><em>Interest Today</em></h2>
+    <p class="body-copy reveal d2">Whether you're enquiring about 20 Dafne Street or want to be notified of upcoming launches across D19, D20, and D28 — our team will reach out promptly.</p>
+    <div class="contact-details reveal d3">
+      <div class="ct-row">
+        <div class="ct-icon">📍</div>
+        <div><div class="ct-label">Location</div><div class="ct-value">Singapore</div></div>
+      </div>
+      <div class="ct-row">
+        <div class="ct-icon">✉</div>
+        <div><div class="ct-label">Email</div><div class="ct-value">hello@manheng.com.sg</div></div>
+      </div>
+      <div class="ct-row">
+        <div class="ct-icon">🏠</div>
+        <div><div class="ct-label">Projects</div><div class="ct-value">D15 · D19 · D20 · D28</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-form-box reveal d2">
+    <div class="contact-form-title">Send an Enquiry</div>
+    <div id="ct-body">
+      <div class="fgl-row">
+        <div><label>First Name</label><input type="text" placeholder="First name"></div>
+        <div><label>Last Name</label><input type="text" placeholder="Last name"></div>
+      </div>
+      <div class="fgl-grp"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+      <div class="fgl-grp"><label>Phone</label><input type="tel" placeholder="+65 9XXX XXXX"></div>
+      <div class="fgl-grp">
+        <label>Project of Interest</label>
+        <select>
+          <option value="">Select a project</option>
+          <option>D15 — 20 Dafne Street (Open for Sale)</option>
+          <option>D19 — 3 Plantation Avenue (Upcoming 2027)</option>
+          <option>D20 — Lower Peirce Reservoir Pk (Upcoming 2027)</option>
+          <option>D28 — Seletar Hill Estate (Upcoming 2028)</option>
+          <option>General Enquiry</option>
+        </select>
+      </div>
+      <div class="fgl-grp"><label>Message</label><textarea placeholder="Tell us what you're looking for..."></textarea></div>
+      <div class="fgl-submit">
+        <button class="btn btn-gold" onclick="submitForm('ct-body','ct-success')">Submit Enquiry</button>
+      </div>
+      <p class="fgl-note">We respect your privacy. Details used solely to respond to your enquiry.</p>
+    </div>
+    <div class="form-success" id="ct-success">
+      <div class="ck">✓</div>
+      <h4>Thank You</h4>
+      <p>Your enquiry has been received.<br>Our team will be in touch shortly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="assets/logo.png" alt="ManHeng" class="footer-logo-img">
+      <span class="footer-tagline">Homes That Last · Value That Grows</span>
+      <p>Singapore's boutique landed residential developer, crafting freehold homes of enduring quality and long-term value — legacies designed to serve families for generations.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Our Projects</h5>
+      <a href="dafne.html">D15 — 20 Dafne Street</a>
+      <a href="plantation.html">D19 — 3 Plantation Avenue</a>
+      <a href="peirce.html">D20 — Lower Peirce Reservoir Pk</a>
+      <a href="seletar.html">D28 — Seletar Hill Estate</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="#about">About ManHeng</a>
+      <a href="process.html">Design Process</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© <span id="footerYear"></span> ManHeng Pte. Ltd. · All Rights Reserved · Singapore</span>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">CEA Disclosure</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>
+(function(){
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots   = document.querySelectorAll('.hero-dot');
+  const numEl  = document.getElementById('slideNum');
+  let current  = 0;
+  let timer    = null;
+  const DURATION = 5000; // 5s per slide
+
+  function goToSlide(n){
+    slides[current].classList.remove('active');
+    slides[current].classList.add('prev');
+    dots[current].classList.remove('active');
+
+    // Remove prev class after transition finishes
+    const old = current;
+    setTimeout(()=>{ slides[old].classList.remove('prev'); }, 1400);
+
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    numEl.textContent = String(current + 1).padStart(2,'0');
+
+    clearInterval(timer);
+    timer = setInterval(()=>goToSlide(current + 1), DURATION);
+  }
+
+  // Expose globally for dot buttons
+  window.goToSlide = goToSlide;
+
+  // Autoplay
+  timer = setInterval(()=>goToSlide(current + 1), DURATION);
+
+  // Pause on hover
+  document.getElementById('hero').addEventListener('mouseenter', ()=>clearInterval(timer));
+  document.getElementById('hero').addEventListener('mouseleave', ()=>{ timer = setInterval(()=>goToSlide(current + 1), DURATION); });
+
+  // Swipe support for mobile
+  let touchX = 0;
+  document.getElementById('hero').addEventListener('touchstart', e=>{ touchX = e.touches[0].clientX; }, {passive:true});
+  document.getElementById('hero').addEventListener('touchend',   e=>{
+    const dx = e.changedTouches[0].clientX - touchX;
+    if(Math.abs(dx) > 50) goToSlide(dx < 0 ? current + 1 : current - 1);
+  }, {passive:true});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lower Peirce Reservoir Park — ManHeng</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+#hero{position:relative;height:100vh;min-height:680px;display:flex;align-items:center;overflow:hidden;background:#0a0604}
+.hero-bg{position:absolute;inset:0;background:url('assets/hqp_peirce.jpg') center 20%/cover no-repeat;transform:scale(1.08);transition:transform 12s ease-out}
+.hero-bg.loaded{transform:scale(1)}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(110deg,rgba(10,6,4,.8) 0%,rgba(10,6,4,.2) 55%,rgba(10,6,4,.5) 100%)}
+.hero-content{position:relative;z-index:2;padding:0 80px;max-width:800px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.7);font-size:8.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;padding:6px 14px;margin-bottom:24px;opacity:0;animation:fadeUp .8s .3s forwards}
+h1.proj-h{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5.5vw,78px);font-weight:300;color:#fff;line-height:1.08;letter-spacing:-.02em;opacity:0;animation:fadeUp 1s .5s cubic-bezier(.16,1,.3,1) forwards}
+h1.proj-h em{font-style:italic;color:var(--gold-l)}
+.hero-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.55);line-height:1.9;margin-top:22px;max-width:460px;opacity:0;animation:fadeUp .9s .7s cubic-bezier(.16,1,.3,1) forwards}
+.hero-ctas{display:flex;gap:14px;margin-top:40px;opacity:0;animation:fadeUp .9s .9s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+.coming-banner{background:var(--gold);padding:16px 80px;display:flex;align-items:center;justify-content:space-between}
+.cb-text{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#fff}
+.cb-pulse{display:flex;align-items:center;gap:8px;font-size:10px;color:rgba(255,255,255,.8);letter-spacing:.14em;text-transform:uppercase}
+.pulse-dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:pulse 1.8s ease-in-out infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+#overview{display:grid;grid-template-columns:1fr 1fr;background:var(--cream)}
+.ov-img{position:relative;overflow:hidden;min-height:560px}
+.ov-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.16,1,.3,1);opacity:.9}
+.ov-img:hover img{transform:scale(1.04)}
+.ov-body{padding:100px 80px;display:flex;flex-direction:column;justify-content:center}
+.ov-body h2{margin-bottom:20px}
+.ov-body .body-copy{margin-bottom:32px}
+.hl-table{border:1px solid var(--border)}
+.hl-row{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)}
+.hl-row:last-child{border:none}
+.hl-k{padding:15px 20px;font-size:9px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);background:rgba(184,150,62,.04);border-right:1px solid var(--border)}
+.hl-v{padding:15px 20px;font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;color:var(--brown)}
+.hl-v.status{font-family:'Jost',sans-serif;font-size:12px;font-weight:500;letter-spacing:.08em;color:var(--gold)}
+#nearby{padding:100px 80px;background:var(--warm);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.nb-img{overflow:hidden}
+.nb-img img{width:100%;height:460px;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.nb-img:hover img{transform:scale(1.04)}
+.nb-body h2{margin-bottom:28px}
+.nb-item{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:13px;font-weight:300;color:var(--brown-m)}
+.nb-dist{font-size:11px;font-weight:500;color:var(--gold);background:var(--gold-pale);padding:3px 8px}
+#enquire{padding:120px 80px;background:var(--brown);display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
+.enq-left h2{color:#fff;margin-bottom:20px}
+.enq-left p{font-size:14px;font-weight:300;color:rgba(255,255,255,.42);line-height:1.9;margin-bottom:32px}
+.enq-form-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:48px}
+.enq-form-h{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#fff;margin-bottom:28px}
+.other-projects{padding:100px 80px;background:var(--cream)}
+.op-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:52px}
+.op-card{position:relative;overflow:hidden;background:#0a0604;cursor:none;display:block;text-decoration:none}
+.op-card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1),opacity .4s;opacity:.82}
+.op-card:hover img{transform:scale(1.06);opacity:.6}
+.op-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,6,4,.9),transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px}
+.op-badge{display:inline-block;padding:4px 10px;margin-bottom:10px;font-size:8px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;width:fit-content}
+.op-dist{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-l);margin-bottom:6px}
+.op-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff;line-height:1.2;margin-bottom:12px}
+.op-link{font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-l);opacity:0;transform:translateY(6px);transition:all .3s}
+.op-card:hover .op-link{opacity:1;transform:none}
+@media(max-width:900px){
+  .hero-content{padding:0 28px}.coming-banner{padding:14px 24px;flex-direction:column;gap:8px;text-align:center}
+  #overview,#nearby,#enquire{grid-template-columns:1fr}
+  .ov-body,.enq-form-wrap{padding:60px 28px}.enq-form-wrap{padding:32px 22px}
+  .nb-img img{height:55vw}#nearby,#enquire,.other-projects{padding:80px 28px}
+  .op-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<nav id="mainNav" class="light" data-light>
+  <a href="index.html#projects" class="nav-back"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 3L5 8l5 5"/></svg>All Projects</a>
+  <div class="nav-links">
+    <a href="#overview">Overview</a>
+    <a href="#nearby" class="hide-mob">Location</a>
+    <a href="#enquire" class="btn-nav">Register Interest</a>
+  </div>
+</nav>
+<section id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-grad"></div>
+  <div class="hero-content">
+    <div class="hero-badge">⏳ Upcoming Launch</div>
+    <h1 class="proj-h">D20 — Lower Peirce Reservoir Pk<br><em>Lower Peirce Reservoir Park</em></h1>
+    <p class="hero-sub">A rare freehold terrace house positioned adjacent to the serene Lower Peirce Reservoir Park in District 20 — one of Singapore's mo...</p>
+    <div class="hero-ctas">
+      <a href="#enquire" class="btn btn-gold">Register Interest</a>
+      <a href="#overview" class="btn btn-outline-light">Learn More</a>
+    </div>
+  </div>
+</section>
+<div class="coming-banner">
+  <span class="cb-text">Launching Q4 2027 — Be the First to Know</span>
+  <span class="cb-pulse"><span class="pulse-dot"></span>Registrations Open</span>
+</div>
+<section id="overview">
+  <div class="ov-img reveal"><img src="assets/hqp_peirce.jpg" alt="Lower Peirce Reservoir Park"></div>
+  <div class="ov-body">
+    <div class="eyebrow reveal">Project Overview</div>
+    <h2 class="section-h reveal d1">An <em>Upcoming</em><br>ManHeng Home</h2>
+    <p class="body-copy reveal d2">A rare freehold terrace house positioned adjacent to the serene Lower Peirce Reservoir Park in District 20 — one of Singapore's most coveted nature-adjacent residential addresses, offering lush greenery, tranquility, and exclusive landed living.</p>
+    <p class="body-copy reveal d2" style="margin-top:14px">As with all ManHeng homes, this project will be developed with the same meticulous attention to spatial design, material quality, and long-term value that defines the brand. Full details will be released closer to launch.</p>
+    <div class="hl-table reveal d3" style="margin-top:36px">
+      <div class="hl-row"><div class="hl-k">District</div><div class="hl-v">D20 — Lower Peirce Reservoir Pk</div></div>
+      <div class="hl-row"><div class="hl-k">Type</div><div class="hl-v">Terrace House</div></div>
+      <div class="hl-row"><div class="hl-k">Tenure</div><div class="hl-v">Freehold</div></div>
+      <div class="hl-row"><div class="hl-k">Est. TOP</div><div class="hl-v">Q4 2027</div></div>
+      <div class="hl-row"><div class="hl-k">Status</div><div class="hl-v status">Upcoming — Registrations Open</div></div>
+    </div>
+  </div>
+</section>
+<section id="nearby">
+  <div class="nb-img reveal"><img src="assets/hqp3.jpg" alt="Location"></div>
+  <div class="nb-body reveal d1">
+    <div class="eyebrow">Location Highlights</div>
+    <h2 class="section-h">What's<br><em>Nearby</em></h2>
+    <div style="margin-top:24px;display:flex;flex-direction:column;gap:0">
+      <div class="nb-item"><span>Upper Thomson MRT (TE8)</span><span class="nb-dist">~1.2 km</span></div>
+      <div class="nb-item"><span>Lower Peirce Reservoir Park</span><span class="nb-dist">Steps away</span></div>
+      <div class="nb-item"><span>Thomson Plaza</span><span class="nb-dist">~1.5 km</span></div>
+      <div class="nb-item"><span>Ai Tong School</span><span class="nb-dist">~1.0 km</span></div>
+      <div class="nb-item"><span>Catholic High School</span><span class="nb-dist">~1.2 km</span></div>
+    </div>
+    <p class="body-copy" style="margin-top:24px;font-size:12px">Exact distances confirmed upon launch. Register your interest to receive the full amenities report.</p>
+  </div>
+</section>
+<section id="enquire">
+  <div class="enq-left">
+    <div class="eyebrow eyebrow-light reveal">Be First in Line</div>
+    <h2 class="section-h reveal d1" style="color:#fff">Register Your<br><em style="color:rgba(255,255,255,.5)">Interest Today</em></h2>
+    <p class="reveal d2" style="font-size:14px;font-weight:300;color:rgba(255,255,255,.42);line-height:1.9;margin-bottom:32px">Be among the first to receive launch details, floor plans, and pricing for Lower Peirce Reservoir Park. Register now and our team will be in touch.</p>
+    <a href="index.html#projects" class="btn btn-outline-light reveal d3">Back to All Projects</a>
+  </div>
+  <div class="enq-form-wrap reveal d2">
+    <div class="enq-form-h">Register Interest</div>
+    <div id="enq-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:22px">
+        <div class="fg"><label>First Name</label><input type="text" placeholder="First name"></div>
+        <div class="fg"><label>Last Name</label><input type="text" placeholder="Last name"></div>
+      </div>
+      <div class="fg"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+      <div class="fg"><label>Phone</label><input type="tel" placeholder="+65 9XXX XXXX"></div>
+      <div class="fg"><label>Budget Range</label><select><option value="">Select a range</option><option>Below $5M</option><option>$5M – $7M</option><option>$7M – $10M</option><option>Above $10M</option></select></div>
+      <div class="fg"><label>Message</label><textarea placeholder="Any specific requirements?"></textarea></div>
+      <button class="btn btn-gold" style="width:100%;justify-content:center;margin-top:6px" onclick="submitForm('enq-body','enq-success')">Submit Registration</button>
+      <p class="form-note">Details kept private, used solely to notify you of this launch.</p>
+    </div>
+    <div class="success-box" id="enq-success"><div class="check">✓</div><h4>Registered</h4><p>We'll be in touch when Lower Peirce Reservoir Park launches. Thank you for your interest.</p></div>
+  </div>
+</section>
+<section class="other-projects">
+  <div class="eyebrow reveal">Explore More</div>
+  <h2 class="section-h reveal d1">Other ManHeng <em>Projects</em></h2>
+  <div class="op-grid">
+    <a class="op-card reveal" href="dafne.html"><img src="assets/hqp_dafne.jpg" alt="20 Dafne Street"><div class="op-overlay"><div class="op-badge badge-sale">Open for Sale</div><div class="op-dist">D15 — Opera Estate</div><div class="op-name">20 Dafne Street</div><div class="op-link">View Project →</div></div></a>
+    <a class="op-card reveal d1" href="plantation.html"><img src="assets/hqp_plantation.jpg" alt="3 Plantation Avenue"><div class="op-overlay"><div class="op-badge badge-up">Upcoming</div><div class="op-dist">D19 — Serangoon Garden</div><div class="op-name">3 Plantation Avenue</div><div class="op-link">View Project →</div></div></a>
+    <a class="op-card reveal d2" href="peirce.html"><img src="assets/hqp_peirce.jpg" alt="Lower Peirce"><div class="op-overlay"><div class="op-badge badge-up">Upcoming</div><div class="op-dist">D20 — Lower Peirce</div><div class="op-name">Lower Peirce Reservoir Park</div><div class="op-link">View Project →</div></div></a>
+  </div>
+</section>
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="assets/logo.png" alt="ManHeng" class="footer-logo-img">
+      <span class="footer-tagline">Homes That Last · Value That Grows</span>
+      <p>Singapore's boutique landed residential developer, crafting freehold homes of enduring quality and long-term value.</p>
+    </div>
+    <div class="footer-col">
+      <h5>All Projects</h5>
+      <a href="dafne.html">D15 — 20 Dafne Street</a>
+      <a href="plantation.html">D19 — 3 Plantation Avenue</a>
+      <a href="peirce.html">D20 — Lower Peirce Reservoir Pk</a>
+      <a href="seletar.html">D28 — Seletar Hill Estate</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="index.html#about">About ManHeng</a>
+      <a href="process.html">Design Process</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© <span id="footerYear"></span> ManHeng Pte. Ltd. · All Rights Reserved · Singapore</span>
+    <div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">CEA Disclosure</a></div>
+  </div>
+</footer>
+<script src="assets/main.js"></script>
+<script>setTimeout(()=>document.getElementById('heroBg').classList.add('loaded'),80)</script>
+</body></html>
